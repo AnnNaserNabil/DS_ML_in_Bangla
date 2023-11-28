@@ -1,5 +1,13 @@
 # বাংলায় মেশিন লার্নিং ও ডাটা সায়েন্স
 
+
+[![An old rock in the desert](/assets/Data-science-and-AI.png "Data Science & AI")]
+
+
+
+~~(https://www.flickr.com/photos/beaurogers/31833779864/in/photolist-Qv3rFw-34mt9F-a9Cmfy-5Ha3Zi-9msKdv-o3hgjr-hWpUte-4WMsJ1-KUQ8N-deshUb-vssBD-6CQci6-8AFCiD-zsJWT-nNfsgB-dPDwZJ-bn9JGn-5HtSXY-6CUhAL-a4UTXB-ugPum-KUPSo-fBLNm-6CUmpy-4WMsc9-8a7D3T-83KJev-6CQ2bK-nNusHJ-a78rQH-nw3NvT-7aq2qf-8wwBso-3nNceh-ugSKP-4mh4kh-bbeeqH-a7biME-q3PtTf-brFpgb-cg38zw-bXMZc-nJPELD-f58Lmo-bXMYG-bz8AAi-bxNtNT-bXMYi-bXMY6-bXMYv)~~
+
+
 মেশিন লার্নিং এবং ডাটা সায়েন্স নিয়ে কাজ শুরু করতে গেলে ঠিক কোথাথেকে শুরু করব এটা অনেকেই বুঝতে পারি না। সেক্ষেত্রে বিভিন্ন সময় আমরা খুব র‍্যান্ডমলি বিভিন্ন পথে আগাতে থাকি এবং একটা স্ট্রাকচারাইজড ওয়ে না পেয়ে ডাটা সায়েন্সের কোর বিষয় গুলো নিয়ে আগাতে বিভিন্ন রকম প্রতিবন্ধকতার সম্মুখীন হয়ে থাকি। সেক্ষত্রে আমি 
 নিজে যেভাবে মেশিন লার্নিং ও ডাটা সায়েন্স শিখছি সেটা শেয়ার করার জন্য এই রিপোটা ওপেন করেছি। 
 
