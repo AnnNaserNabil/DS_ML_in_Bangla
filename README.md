@@ -1,6 +1,14 @@
-# বাংলায় মেশিন লার্নিং ও ডাটা সায়েন্স
+
+<body>
+<center>
+  <h1>বাংলায় মেশিন লার্নিং ও ডাটা সায়েন্স</h1>
+</center>
+</body>
+
 
 [![An old rock in the desert](/assets/Data-science-and-AI.png "Data Science & AI")]
+
+
 
 
 
