@@ -247,7 +247,7 @@ plt.show()
 
 
     
-![png](/assets/SentimentAnalyis/output_3_0.png)
+![png](/assets/SentimentAnalyis/output_30_0.png)
     
 
 
