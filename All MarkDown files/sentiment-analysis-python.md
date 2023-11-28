@@ -267,7 +267,7 @@ plt.show()
 
 
     
-![png](output_7_0.png)
+![png](/assets/gallery/sentiment-analysis-python/output_7_0.png)
     
 
 
@@ -606,7 +606,7 @@ plt.show()
 
 
     
-![png](output_29_0.png)
+![png](/assets/gallery/sentiment-analysis-python/output_29_0.png)
     
 
 
@@ -625,7 +625,7 @@ plt.show()
 
 
     
-![png](output_30_0.png)
+![png](/assets/gallery/sentiment-analysis-python/output_30_0.png)
     
 
 
@@ -783,11 +783,70 @@ plt.show()
 
 
     
-![png](output_42_0.png)
+![png](/assets/gallery/sentiment-analysis-python/output_42_0.png)
     
 
 
+# Review Examples:
 
+- Positive 1-Star and Negative 5-Star Reviews
+
+Lets look at some examples where the model scoring and review score differ the most.
+
+
+```python
+results_df.query('Score == 1') \
+    .sort_values('roberta_pos', ascending=False)['Text'].values[0]
+```
+
+
+
+
+    'I felt energized within five minutes, but it lasted for about 45 minutes. I paid $3.99 for this drink. I could have just drunk a cup of coffee and saved my money.'
+
+
+
+
+```python
+results_df.query('Score == 1') \
+    .sort_values('vader_pos', ascending=False)['Text'].values[0]
+```
+
+
+
+
+    'So we cancelled the order.  It was cancelled without any problem.  That is a positive note...'
+
+
+
+
+```python
+# nevative sentiment 5-Star view
+```
+
+
+```python
+results_df.query('Score == 5') \
+    .sort_values('roberta_neg', ascending=False)['Text'].values[0]
+```
+
+
+
+
+    'this was sooooo deliscious but too bad i ate em too fast and gained 2 pds! my fault'
+
+
+
+
+```python
+results_df.query('Score == 5') \
+    .sort_values('vader_neg', ascending=False)['Text'].values[0]
+```
+
+
+
+
+    'this was sooooo deliscious but too bad i ate em too fast and gained 2 pds! my fault'
 
 
 

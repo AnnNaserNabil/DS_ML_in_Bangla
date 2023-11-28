@@ -247,7 +247,7 @@ plt.show()
 
 
     
-![png](output_3_0.png)
+![png](/assets/gallery/02-visualize-data/output_3_0.png)
     
 
 
@@ -284,7 +284,7 @@ plt.show()
 
 
     
-![png](output_5_0.png)
+![png](/assets/gallery/02-visualize-data/output_5_0.png)
     
 
 
@@ -311,7 +311,7 @@ plt.show()
 
 
     
-![png](output_7_0.png)
+![png](/assets/gallery/02-visualize-data/output_7_0.png)
     
 
 
@@ -351,7 +351,7 @@ fig.show()
 
 
     
-![png](output_9_1.png)
+![png](/assets/gallery/02-visualize-data/output_9_1.png)
     
 
 
@@ -372,7 +372,7 @@ df_students.plot.bar(x='Name', y='StudyHours', color='teal', figsize=(6,4))
 
 
     
-![png](output_11_1.png)
+![png](/assets/gallery/02-visualize-data/output_11_1.png)
     
 
 
@@ -418,7 +418,7 @@ fig.show()
 
 
     
-![png](output_13_1.png)
+![png](/assets/gallery/02-visualize-data/output_13_1.png)
     
 
 
@@ -491,7 +491,7 @@ fig.show()
 
 
     
-![png](output_15_2.png)
+![png](/assets/gallery/02-visualize-data/output_15_2.png)
     
 
 
@@ -524,7 +524,7 @@ fig.show()
 
 
     
-![png](output_17_1.png)
+![png](/assets/gallery/02-visualize-data/output_17_1.png)
     
 
 
@@ -595,7 +595,7 @@ show_distribution(col)
 
 
     
-![png](output_19_2.png)
+![png](/assets/gallery/02-visualize-data/output_19_2.png)
     
 
 
@@ -635,7 +635,7 @@ show_density(col)
 
 
     
-![png](output_21_0.png)
+![png](/assets/gallery/02-visualize-data/output_21_0.png)
     
 
 

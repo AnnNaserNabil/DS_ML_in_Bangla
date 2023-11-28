@@ -116,7 +116,7 @@ show_distribution(df_students['Grade'])
 
 
     
-![png](/assets/SentimentAnalyis/output_1_2.png)
+![png](/assets/gallery/03-real-world-data/output_1_2.png)
     
 
 
@@ -147,7 +147,7 @@ show_distribution(col)
 
 
     
-![png](/assets/SentimentAnalyis/output_3_2.png)
+![png](/assets/gallery/03-real-world-data/output_3_2.png)
     
 
 
@@ -182,7 +182,7 @@ show_distribution(col)
 
 
     
-![png](/assets/SentimentAnalyis/output_5_2.png)
+![png](/assets/gallery/03-real-world-data/output_5_2.png)
     
 
 
@@ -214,7 +214,7 @@ show_distribution(col)
 
 
     
-![png](/assets/SentimentAnalyis/output_7_2.png)
+![png](/assets/gallery/03-real-world-data/output_7_2.png)
     
 
 
@@ -251,7 +251,7 @@ show_density(col)
 
 
     
-![png](/assets/SentimentAnalyis/output_9_0.png)
+![png](/assets/gallery/03-real-world-data/output_9_0.png)
     
 
 
@@ -342,7 +342,7 @@ plt.show()
 
 
     
-![png](/assets/SentimentAnalyis/output_13_0.png)
+![png](/assets/gallery/03-real-world-data/output_13_0.png)
     
 
 
@@ -650,7 +650,7 @@ df_sample.boxplot(column='StudyHours', by='Pass', figsize=(8,5))
 
 
     
-![png](/assets/SentimentAnalyis/output_19_1.png)
+![png](/assets/gallery/03-real-world-data/output_19_1.png)
     
 
 
@@ -676,7 +676,7 @@ df_sample.plot(x='Name', y=['Grade','StudyHours'], kind='bar', figsize=(8,5))
 
 
     
-![png](/assets/SentimentAnalyis/output_21_1.png)
+![png](/assets/gallery/03-real-world-data/output_21_1.png)
     
 
 
@@ -710,7 +710,7 @@ df_normalized.plot(x='Name', y=['Grade','StudyHours'], kind='bar', figsize=(8,5)
 
 
     
-![png](/assets/SentimentAnalyis/output_23_1.png)
+![png](/assets/gallery/03-real-world-data/output_23_1.png)
     
 
 
@@ -753,7 +753,7 @@ df_sample.plot.scatter(title='Study Time vs Grade', x='StudyHours', y='Grade')
 
 
     
-![png](/assets/SentimentAnalyis/output_27_1.png)
+![png](/assets/gallery/03-real-world-data/output_27_1.png)
     
 
 
@@ -799,7 +799,7 @@ plt.show()
 
 
     
-![png](/assets/SentimentAnalyis/output_29_1.png)
+![png](/assets/gallery/03-real-world-data/output_29_1.png)
     
 
 
