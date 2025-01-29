@@ -1,1 +1,318 @@
 https://auth.anaconda.cloud/api/auth/login/verify-challenge/6a8cb530-7e19-4cfa-b5b7-4228769b50f5?token=Uqag03DbsZGSBNVHeR0zZugCgJu7lRH6UHs67ZEUOMQ
+
+
+
+
+Project Specification: Movie Recommendation System (Web App with Django)
+Overview
+This project is a movie recommendation system built as a Django-based web application. The system will suggest movies based on user preferences, including genre, favorite actors, time frame, language, and production house origin. It will fetch movie data from TMDB API, store it in a NeonDB (PostgreSQL) database, and use a recommendation algorithm to generate personalized movie suggestions. The web app will be deployed on Streamlit Cloud for online access.
+
+Core Features
+1. User Interaction & Input
+Users select a movie genre they want to watch.
+Users pick some actors they like.
+Users specify a time frame (e.g., movies from 1990–2020).
+Users select the language and the origin of the production house.
+Users can also provide a few movies they liked for better recommendations.
+2. Data Collection & Storage
+The system will use TMDB API to fetch movie details, including genres, actors, release dates, languages, and production houses.
+Movie data will be stored in a NeonDB (PostgreSQL) database.
+User preference data will also be stored for personalized recommendations.
+3. Recommendation Algorithm
+The system will use a hybrid recommendation approach, combining:
+Content-based filtering: Suggesting movies similar to the ones users like based on genres, actors, and metadata.
+Collaborative filtering: Finding similarities between users with similar preferences and suggesting movies they liked.
+Weighted scoring: Using a weighted formula to balance different factors (genre, actors, release year, language, production house).
+4. Movie Recommendation Process
+The system will analyze user-selected genres, actors, and time frame.
+It will filter movies matching user preferences from the database.
+A similarity algorithm (Cosine Similarity, Pearson Correlation, etc.) will be used to refine results.
+The system will rank and display recommended movies to the user.
+5. Web App Features (Django + Streamlit UI)
+User-friendly Interface: A simple, interactive UI for selecting preferences.
+Real-time API Calls: Fetching movie data from TMDB API dynamically.
+Database Management: Storing and retrieving user preferences & movie data efficiently.
+Personalized Dashboard: Users can view, refine, and update their recommendations.
+Technology Stack
+Backend
+Django (Python): Web framework for handling requests, database interactions, and API integration.
+PostgreSQL (NeonDB): Cloud database for storing movies and user preferences.
+TMDB API: Fetching movie details, genres, actors, etc.
+Scikit-learn / NumPy / Pandas: For implementing recommendation algorithms.
+Frontend
+Streamlit: Lightweight UI framework for rendering interactive recommendations.
+HTML, CSS, JavaScript (optional): For additional UI customization.
+Hosting & Deployment
+Streamlit Cloud: Hosting the web application.
+NeonDB: Online PostgreSQL database for fast, scalable storage.
+
+
+
+
+movie-recommendation/
+│── app/                             # Django app source code
+│   │── __init__.py                  
+│   │── views.py                      # Django views for handling API requests
+│   │── models.py                     # Database models for storing movie & user data
+│   │── urls.py                        # URL routing
+│   │── recommend.py                   # Core recommendation logic
+│   │── tmdb_api.py                    # Fetch data from TMDB API
+│   │── database.py                     # Database interaction logic
+│   │── serializers.py                  # Django REST framework serializers
+│── templates/                         # HTML templates (if needed)
+│── static/                            # CSS, JavaScript, and assets
+│── frontend/                          # Streamlit UI for recommendations
+│── requirements.txt                    # Python dependencies
+│── manage.py                          # Django project management script
+│── .gitignore                         # Ignore unnecessary files
+│── README.md                          # Project documentation
+│── config.py                          # API keys and settings
+
+
+
+
+
+complete the project
+To complete the Movie Recommendation System project, we need to implement the core functionality, integrate the components, and ensure the system works as expected. Below is a step-by-step guide to completing the project:
+
+Step 1: Set Up the Django Project
+Install Django and Dependencies:
+
+bash
+Copy
+pip install django djangorestframework psycopg2-binary pandas scikit-learn numpy requests
+Create the Django Project:
+
+bash
+Copy
+django-admin startproject movie_recommendation
+cd movie_recommendation
+Create the Django App:
+
+bash
+Copy
+python manage.py startapp app
+Update settings.py:
+
+Add app to INSTALLED_APPS.
+
+Configure the PostgreSQL database (NeonDB):
+
+python
+Copy
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'your_db_name',
+        'USER': 'your_db_user',
+        'PASSWORD': 'your_db_password',
+        'HOST': 'your_neon_host',
+        'PORT': '5432',
+    }
+}
+Step 2: Define Database Models
+In app/models.py, define models for storing movie and user data:
+
+python
+Copy
+from django.db import models
+
+class Movie(models.Model):
+    title = models.CharField(max_length=255)
+    release_date = models.DateField()
+    genre = models.CharField(max_length=255)
+    language = models.CharField(max_length=100)
+    production_house = models.CharField(max_length=255)
+    actors = models.TextField()  # Store as comma-separated string
+    tmdb_id = models.IntegerField(unique=True)
+
+    def __str__(self):
+        return self.title
+
+class UserPreference(models.Model):
+    user_id = models.IntegerField(unique=True)
+    preferred_genres = models.TextField()  # Comma-separated genres
+    favorite_actors = models.TextField()  # Comma-separated actors
+    preferred_languages = models.TextField()  # Comma-separated languages
+    preferred_time_frame = models.CharField(max_length=50)  # e.g., "1990-2020"
+    liked_movies = models.ManyToManyField(Movie)  # Movies the user liked
+
+    def __str__(self):
+        return f"User {self.user_id}"
+Run migrations:
+
+bash
+Copy
+python manage.py makemigrations
+python manage.py migrate
+Step 3: Fetch Data from TMDB API
+In app/tmdb_api.py, create a function to fetch movie data:
+
+python
+Copy
+import requests
+
+TMDB_API_KEY = 'your_tmdb_api_key'
+
+def fetch_movie_details(movie_id):
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    return None
+
+def search_movies(query):
+    url = f"https://api.themoviedb.org/3/search/movie?api_key={TMDB_API_KEY}&query={query}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json().get('results', [])
+    return []
+Step 4: Implement Recommendation Logic
+In app/recommend.py, implement the recommendation algorithm:
+
+python
+Copy
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd
+
+def recommend_movies(user_preferences, movies):
+    # Combine user preferences into a single string
+    user_profile = f"{user_preferences.preferred_genres} {user_preferences.favorite_actors} {user_preferences.preferred_languages}"
+
+    # Create a TF-IDF matrix for movies
+    movie_data = movies.apply(lambda x: f"{x.genre} {x.actors} {x.language}", axis=1)
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform(movie_data)
+
+    # Transform user profile into TF-IDF vector
+    user_vector = vectorizer.transform([user_profile])
+
+    # Calculate cosine similarity
+    similarities = cosine_similarity(user_vector, tfidf_matrix).flatten()
+
+    # Rank movies by similarity
+    movies['similarity'] = similarities
+    recommended_movies = movies.sort_values(by='similarity', ascending=False)
+
+    return recommended_movies.head(10)  # Return top 10 recommendations
+Step 5: Create Django Views
+In app/views.py, create views to handle user input and display recommendations:
+
+python
+Copy
+from django.shortcuts import render
+from django.http import JsonResponse
+from .models import Movie, UserPreference
+from .recommend import recommend_movies
+import pandas as pd
+
+def get_recommendations(request):
+    if request.method == 'POST':
+        # Get user preferences from the request
+        user_id = request.POST.get('user_id')
+        preferred_genres = request.POST.get('genres')
+        favorite_actors = request.POST.get('actors')
+        preferred_languages = request.POST.get('languages')
+        preferred_time_frame = request.POST.get('time_frame')
+
+        # Save or update user preferences
+        user_pref, created = UserPreference.objects.get_or_create(user_id=user_id)
+        user_pref.preferred_genres = preferred_genres
+        user_pref.favorite_actors = favorite_actors
+        user_pref.preferred_languages = preferred_languages
+        user_pref.preferred_time_frame = preferred_time_frame
+        user_pref.save()
+
+        # Fetch movies from the database
+        movies = pd.DataFrame(list(Movie.objects.all().values()))
+
+        # Get recommendations
+        recommendations = recommend_movies(user_pref, movies)
+
+        return JsonResponse(recommendations.to_dict('records'), safe=False)
+
+    return render(request, 'index.html')
+Step 6: Set Up Streamlit UI
+In frontend/app.py, create a Streamlit interface:
+
+python
+Copy
+import streamlit as st
+import requests
+
+st.title("Movie Recommendation System")
+
+# User input
+user_id = st.text_input("Enter User ID")
+genres = st.text_input("Enter Preferred Genres (comma-separated)")
+actors = st.text_input("Enter Favorite Actors (comma-separated)")
+languages = st.text_input("Enter Preferred Languages (comma-separated)")
+time_frame = st.text_input("Enter Preferred Time Frame (e.g., 1990-2020)")
+
+if st.button("Get Recommendations"):
+    response = requests.post(
+        "http://localhost:8000/get_recommendations/",
+        data={
+            "user_id": user_id,
+            "genres": genres,
+            "actors": actors,
+            "languages": languages,
+            "time_frame": time_frame,
+        },
+    )
+    recommendations = response.json()
+    st.write("Recommended Movies:")
+    for movie in recommendations:
+        st.write(movie['title'])
+Step 7: Deploy the Application
+Deploy Django Backend:
+
+Use a platform like Render or Heroku to deploy the Django app.
+
+Update ALLOWED_HOSTS in settings.py.
+
+Deploy Streamlit Frontend:
+
+Use Streamlit Cloud to deploy the frontend.
+
+Update the API endpoint in frontend/app.py to point to the deployed Django backend.
+
+Deploy NeonDB:
+
+Use the NeonDB dashboard to manage your PostgreSQL database.
+
+Step 8: Test the Application
+Run the Django development server:
+
+bash
+Copy
+python manage.py runserver
+Run the Streamlit app:
+
+bash
+Copy
+streamlit run frontend/app.py
+Test the application by entering user preferences and verifying the recommendations.
+
+Step 9: Add Documentation
+Update README.md with:
+
+Project overview.
+
+Setup instructions.
+
+API documentation.
+
+Deployment details.
+
+Step 10: Optional Enhancements
+Add user authentication.
+
+Implement caching for faster recommendations.
+
+Add a "like/dislike" feature to refine recommendations.
+
+Use Docker for containerization.
+
+This completes the Movie Recommendation System project. Let me know if you need further assistance!
